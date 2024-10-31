@@ -1,0 +1,41 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+@model List<IMDBobligatorisk.Models.Entities.Title>
+
+<h1>IMDB List</h1>
+<table class="table">
+    <thead>
+        <tr>
+            <th>tconst</th>
+            <th>TitleType</th>
+            <th>PrimaryTitle</th>
+            <th>OriginalTitle</th>
+            <th>IsAdult</th>
+            <th>StartYear</th>
+            <th>EndYear</th>
+            <th>RuntimeMinutes</th>
+            <th>Genres</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var title in Model)
+        {
+            <tr>
+                <td>@title.Tconst</td>
+                <td>@title.TitleType</td>
+                <td>@title.PrimaryTitle</td>
+                <td>@title.OriginalTitle</td>
+                <td>@title.IsAdult</td>
+                <td>@title.StartYear</td>
+                <td>@title.EndYear</td>
+                <td>@title.RuntimeMinutes</td>
+                <td>@title.Genres</td>
+            </tr>
+        }
+
+    </tbody>
+    
+</table>
