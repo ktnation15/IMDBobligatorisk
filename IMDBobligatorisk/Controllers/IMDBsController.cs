@@ -44,10 +44,22 @@ namespace IMDBobligatorisk.Controllers
             return View();
         }
         [HttpGet]
-        public async Task<IActionResult> List()
+        public async Task<IActionResult> List(string searchQuery)
         {
-            var titles = await dbContext.Titles.ToListAsync();
+            // Start med at hente alle titler fra databasen
+            var titlesQuery = dbContext.Titles.AsQueryable();
+
+            // Anvend søgefilter, hvis der er en søgeforespørgsel
+            if (!string.IsNullOrEmpty(searchQuery))
+            {
+                titlesQuery = titlesQuery.Where(t => t.PrimaryTitle.Contains(searchQuery) || t.OriginalTitle.Contains(searchQuery));
+            }
+
+            // Begræns resultaterne til de første 50 titler
+            var titles = await titlesQuery.Take(50).ToListAsync();
+
             return View(titles);
         }
+
     }
 }
